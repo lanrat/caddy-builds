@@ -14,7 +14,8 @@ on:
 
 env:
   ## github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
+  #IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME_PREFIX: ${{ github.actor }}/caddy
 
 # TODO: possible method for making dynamic based oon dockerfiles
 # https://gist.github.com/maniankara/db341998b13b22e182e18d3a22bd7c8a
@@ -82,7 +83,7 @@ jobs:
           # tags: ${{ steps.meta.outputs.tags }}
           # labels: ${{ steps.meta.outputs.labels }}
           tags: |
-            ghcr.io/${{ env.IMAGE_NAME }}-${{ matrix.variant }}:latest
+            ghcr.io/${{ env.IMAGE_NAME_PREFIX }}-${{ matrix.variant }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
           file:  ${{ matrix.dockerfile }}
