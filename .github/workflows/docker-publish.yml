@@ -17,6 +17,11 @@ env:
   #IMAGE_NAME: ${{ github.repository }}
   IMAGE_NAME_PREFIX: ${{ github.actor }}/caddy
 
+# only allow one action at a time
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   setup-matrix:
     runs-on: ubuntu-latest
