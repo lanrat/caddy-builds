@@ -19,7 +19,7 @@ env:
 
 # only allow one action at a time
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
