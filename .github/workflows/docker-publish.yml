@@ -37,7 +37,7 @@ jobs:
           # Iterate over all files matching the 'Dockerfile.*' pattern.
           # For each file, the 'variant' is extracted by removing the 'Dockerfile.' prefix.
           # The rest of the command uses jq to safely build the JSON array.
-          json_array=$(for file in Dockerfile.*; do
+          json_array=$(for file in docker/Dockerfile.*; do
             variant="${file#*.}"
             jq -n --arg dockerfile "$file" --arg variant "$variant" '{"dockerfile":$dockerfile, "variant":$variant}'
           done | jq -s -c .)
