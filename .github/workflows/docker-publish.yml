@@ -38,7 +38,7 @@ jobs:
           # The rest of the command uses jq to safely build the JSON array.
           json_array=$(for file in Dockerfile.*; do
             variant="${file#*.}"
-            jq -n --arg filename "$file" --arg variant "$variant" '{"filename":$filename, "variant":$variant}'
+            jq -n --arg dockerfile "$file" --arg variant "$variant" '{"dockerfile":$dockerfile, "variant":$variant}'
           done | jq -s -c .)
 
           echo "Generated JSON: $json_array"
@@ -63,7 +63,8 @@ jobs:
         #     variant: cloudflare
         #   - dockerfile: Dockerfile.route53
         #     variant: route53
-      matrix: ${{ fromJSON(needs.setup-matrix.outputs.matrix) }}
+      matrix:
+        include: ${{ fromJSON(needs.setup-matrix.outputs.matrix) }}
     steps:
       ## https://github.com/actions/checkout
       - name: Checkout repository
