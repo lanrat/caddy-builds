@@ -1,0 +1,9 @@
+FROM caddy:builder AS builder
+RUN xcaddy build \
+    --with github.com/mholt/caddy-l4 \
+    --with github.com/caddy-dns/cloudflare \
+    --with github.com/WeidiDeng/caddy-cloudflare-ip \
+    --with github.com/lanrat/caddy-dynamic-remoteip
+    # TODO add route53 once compatabiliyty issue is fixed
+FROM caddy:latest
+COPY --from=builder /usr/bin/caddy /usr/bin/caddy

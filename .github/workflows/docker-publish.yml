@@ -3,7 +3,7 @@ name: Docker Build and Publish
 # TODO: automate when base image updates: https://github.com/mthalman/docker-bump-action
 on:
   schedule:
-    - cron: '37 7 * * *'
+    - cron: '37 7 * * 3'
   push:
     branches: [ "main" ]
     paths-ignore:
