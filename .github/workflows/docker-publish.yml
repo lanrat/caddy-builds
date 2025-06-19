@@ -92,7 +92,7 @@ jobs:
       #       latest=true
   
       ## https://github.com/docker/build-push-action
-      - name: Build and push Docker image
+      - name: Build and push Docker image ${{ env.IMAGE_NAME_PREFIX }}-${{ matrix.variant }}
         id: build-and-push
         uses: docker/build-push-action@v6
         with:
