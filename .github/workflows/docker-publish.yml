@@ -1,9 +1,11 @@
 name: Docker Build and Publish
 
 # TODO: automate when base image updates: https://github.com/mthalman/docker-bump-action
+# https://github.com/peaceiris/actions-gh-pages
 on:
   schedule:
-    - cron: '37 7 * * 3'
+    # Every 2 weeks
+    - cron: '37 7 1,15 * *'
   push:
     branches: [ "main" ]
     paths-ignore:
