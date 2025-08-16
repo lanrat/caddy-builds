@@ -113,3 +113,22 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.build-and-push.outputs.digest }}
+
+  log-run-timestamp:
+    needs: build-and-push-image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Create timestamp file and push to runs branch
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git checkout --orphan runs
+          git rm -rf .
+          echo "$(date -u '+%Y-%m-%d %H:%M:%S UTC')" > last-run.txt
+          git add last-run.txt
+          git commit -m "Run: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          git push -f origin runs
