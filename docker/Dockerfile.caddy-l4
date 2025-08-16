@@ -1,5 +1,7 @@
 FROM caddy:builder AS builder
 RUN xcaddy build \
-    --with github.com/mholt/caddy-l4
+    --with github.com/mholt/caddy-l4@4d3c80e89c5f80438a3e048a410d5543ff5fb9f4
+#--with github.com/mholt/caddy-l4
+# TODO: https://github.com/mholt/caddy-l4/issues/322
 FROM caddy:latest
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
