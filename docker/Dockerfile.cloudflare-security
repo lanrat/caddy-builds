@@ -7,3 +7,6 @@ RUN xcaddy build \
     --with github.com/mholt/caddy-ratelimit
 FROM caddy:latest
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
+
+# fail the build if the assembled binary is broken
+RUN ["caddy", "list-modules"]
